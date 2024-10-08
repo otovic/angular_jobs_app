@@ -1,0 +1,9 @@
+.clickable-anchor {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+.clickable-anchor:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}

@@ -1,37 +1,31 @@
 /* Styles for the header */
 .header {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space out the elements */
-    padding: 16px; /* Add padding */
-    background-color: #3f51b5; /* Material Design Primary Color */
-    color: white; /* Text color */
+    display: flex;
+    /* Use flexbox for layout */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: space-between;
+    /* Space out the elements */
+    padding: 16px;
+    /* Add padding */
+    background-color: #3f51b5;
+    /* Material Design Primary Color */
+    color: white;
 }
 
-/* Title styles */
 .title-container {
-    flex: 1; /* Take up remaining space */
+    flex: 1;
 }
 
 h4 {
-    margin: 0; /* Remove default margin */
+    margin: 0;
 }
 
-/* Navigation links styles */
 .nav-links {
-    display: flex; /* Align links in a row */
-    justify-content: center; /* Center the links */
-    flex: 2; /* Adjust the flex to occupy more space */
-}
-
-.nav-link {
-    color: white; /* Link color */
-    text-decoration: none; /* Remove underline */
-    margin: 0 15px; /* Space between links */
-}
-
-.nav-link:hover {
-    text-decoration: underline; /* Underline on hover */
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex: 2;
 }
 
 /* Login container styles */
@@ -43,13 +37,18 @@ h4 {
 }
 
 .login-text {
-    margin-right: 8px; /* Space between text and image */
+    margin-right: 8px;
+    /* Space between text and image */
 }
 
 /* Profile image styles */
 .profile-image {
-    width: 40px; /* Set the width of the circular image */
-    height: 40px; /* Set the height of the circular image */
-    border-radius: 50%; /* Make the image circular */
-    object-fit: cover; /* Cover the container */
+    width: 40px;
+    /* Set the width of the circular image */
+    height: 40px;
+    /* Set the height of the circular image */
+    border-radius: 50%;
+    /* Make the image circular */
+    object-fit: cover;
+    /* Cover the container */
 }

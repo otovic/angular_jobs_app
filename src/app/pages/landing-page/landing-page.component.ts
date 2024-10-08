@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HeaderComponent } from '../../components/ui/header/header.component';
+import { MainLayoutModule } from '../../core/modules/main_layout.module';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
   imports: [
-    HeaderComponent
+    MainLayoutModule
   ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css'
