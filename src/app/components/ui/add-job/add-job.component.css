@@ -1,4 +1,4 @@
-#sign-in-content {
+#add-job-content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,8 +6,9 @@
     margin-top: 150px;
 }
 
-.login-container {
+.add-job-form-container {
     background-color: white;
+    box-sizing: border-box;
     padding: 20px;
     border-radius: 8px;
     border: 1px solid black;
@@ -20,6 +21,7 @@ h2 {
 }
 
 .input-group {
+    width: 97%;
     margin-bottom: 15px;
 }
 

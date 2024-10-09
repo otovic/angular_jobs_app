@@ -2,20 +2,14 @@
     <div class="title-container">
         <h4>Angular Jobs App</h4>
     </div>
-    <nav class="nav-links">
+    <nav class="nav-links" *ngIf="user">
         <app-anchor [text]="'Home'" [path]="'/'"></app-anchor>
         <app-anchor [text]="'Add Jobs'" [path]="'/add_new_job'"></app-anchor>
     </nav>
     <div class="login-container">
-        <app-wrapper-anchor [path]="'/sign_in'">
-            <span class="login-text" *ngIf="user">
-                {{ user.username }}
-            </span>
-            <span class="login-text" *ngIf="!user">
-                Login
-            </span>
-            <img src="images/user.png" *ngIf="!user" alt="Profile" class="profile-image" />
-            <img src="images/user_logged_in.png" *ngIf="user" alt="Profile" class="profile-image" />
+        <app-wrapper-anchor [path]="user ? '/profile_overview' : '/sign_in'">
+            <span class="login-text">{{ user ? user.username : 'Login' }}</span>
+            <img [src]="user ? 'images/user_logged_in.png' : 'images/user.png'" alt="Profile" class="profile-image" />
         </app-wrapper-anchor>
     </div>
 </header>

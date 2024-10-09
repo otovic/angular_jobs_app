@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "Petar Otovic",
+      "password": "admin"
+    },
+    {
+      "id": "2",
+      "username": "John Smith",
+      "password": "admin123"
+    }
+  ],
+  "jobs": [
+    {
+      "userId": 1,
+      "jobId": 1,
+      "title": "Software Developer",
+      "postedBy": "Petar Otovic",
+      "description": "We are looking for a software developer to join our team.",
+      "location": "Belgrade, Serbia",
+      "salary": "2000-3000$",
+      "date": "2021-01-01",
+      "id": "984c"
+    },
+    {
+      "id": "ce73",
+      "userId": "1",
+      "jobId": "vxMVZBuR7SXyYFI5",
+      "title": "backend Software Engineer",
+      "postedBy": "Petar Otovic",
+      "description": "description",
+      "location": "Belgrade, Serbia",
+      "salaryLower": 100,
+      "salaryHigher": 200,
+      "date": "2024-10-01"
+    }
+  ]
+}

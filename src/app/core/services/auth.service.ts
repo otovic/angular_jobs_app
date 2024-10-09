@@ -13,7 +13,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('user');
-    console.log("storedUser", storedUser);
     this.userSubject.next(storedUser ? JSON.parse(storedUser) as UserModel : null);
   }
 
@@ -39,5 +38,9 @@ export class AuthService {
   singOut() {
     localStorage.removeItem('user');
     this.userSubject.next(null);
+  }
+
+  isAuthenticated() {
+    return this.userSubject.value !== null;
   }
 }

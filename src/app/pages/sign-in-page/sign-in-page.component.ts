@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MainLayoutModule } from '../../core/modules/main_layout.module';
-import { SignInModule } from '../../core/modules/sign_in.module';
+import { MainLayoutModule } from '../../core/modules/main-layout.module';
+import { SignInModule } from '../../core/modules/sign-in.module';
 
 @Component({
   selector: 'app-sign-in-page',

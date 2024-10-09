@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MainLayoutModule } from '../../core/modules/main_layout.module';
+import { MainLayoutModule } from '../../core/modules/main-layout.module';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
