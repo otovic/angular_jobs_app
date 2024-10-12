@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { JobsService } from '../../../services/jobs.service';
-import { AuthService } from '../../../core/services/auth.service';
 import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
 import { JobModel } from '../../../core/models/job.model';
 
@@ -20,24 +19,24 @@ export class MyJobsComponent {
   ) { }
 
   ngOnInit() {
-    this.optionIndexSubject.pipe(
-      takeUntil(this.unsubscribe$),
-      switchMap(index => {
-        if (index == 0) {
-          return this.jobsService.getUserJobs();
-        }
+    // this.optionIndexSubject.pipe(
+    //   takeUntil(this.unsubscribe$),
+    //   switchMap(index => {
+    //     if (index == 0) {
+    //       return this.jobsService.getUserJobs();
+    //     }
 
-        return [];
-      })
-    ).subscribe(
-      jobs => {
-        this.jobs = jobs ?? [];
-      },
-      error => {
-        console.error('Error fetching jobs:', error);
-        this.error = 'Error fetching jobs';
-      }
-    );
+    //     return [];
+    //   })
+    // ).subscribe(
+    //   jobs => {
+    //     this.jobs = jobs ?? [];
+    //   },
+    //   error => {
+    //     console.error('Error fetching jobs:', error);
+    //     this.error = 'Error fetching jobs';
+    //   }
+    // );
   }
 
   ngOnDestroy() {

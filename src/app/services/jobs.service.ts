@@ -36,7 +36,6 @@ export class JobsService {
   postJob(job: JobModel): Observable<any> {
     return this.http.post(`${JOB_SERVER_URL}`, job).pipe(
       (response) => {
-        console.log('response', response);
         this.router.navigate(['/']);
         return response;
       },

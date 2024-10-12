@@ -3,9 +3,13 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/ui/header/header.component';
 import { AnchorComponent } from '../../components/common/anchor/anchor.component';
 import { WrapperAnchorComponent } from '../../components/common/wrapper-anchor/wrapper-anchor.component';
+import { FooterComponent } from '../../components/ui/footer/footer.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
     AnchorComponent,
@@ -13,6 +17,7 @@ import { WrapperAnchorComponent } from '../../components/common/wrapper-anchor/w
   ],
   exports: [
     HeaderComponent,
+    FooterComponent
   ],
 })
 export class MainLayoutModule { }

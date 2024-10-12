@@ -8,11 +8,14 @@ import { ErrorBlockComponent } from '../../components/common/error-block/error-b
 import { JobCardComponent } from '../../components/common/job-card/job-card.component';
 import { SplitterComponent } from '../../components/common/splitter/splitter.component';
 import { SalaryPipe } from '../pipes/salary.pipe';
+import { JobsDisplayComponent } from '../../components/ui/jobs-display/jobs-display.component';
 
 
 
 @NgModule({
-  declarations: [MyJobsComponent],
+  declarations: [
+    MyJobsComponent,
+  ],
   providers: [JobsService],
   imports: [
     CommonModule,
@@ -21,8 +24,11 @@ import { SalaryPipe } from '../pipes/salary.pipe';
     ErrorBlockComponent,
     JobCardComponent,
     SplitterComponent,
-    SalaryPipe
+    SalaryPipe,
+    JobsDisplayComponent
   ],
-  exports: [MyJobsComponent]
+  exports: [
+    MyJobsComponent,
+  ]
 })
 export class UserProfileModule { }

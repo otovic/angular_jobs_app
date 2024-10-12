@@ -36,7 +36,7 @@ export class JobCardComponent {
 
   ngOnInit() {
     this.userSubscription = this.auth.user$.subscribe(user => {
-      console.log('Usersdasdasda:', user && this.job.userId !== user.id);
+      console.log('Usersdasdasda:', user && this.job.applications.includes(user.id!.toString()));
       this.user = user;
     });
   }

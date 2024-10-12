@@ -14,5 +14,8 @@
             <app-button text="Apply" (click)="applyForJob()" color="green"
                 *ngIf="user && job.userId !== user.id && !job.applications.includes(user.id.toString())" />
         </div>
+        <div class="application-notification" *ngIf="user && job.applications.includes(user.id.toString())">
+            <p>You have already applied for this job.</p>
+        </div>
     </div>
 </div>

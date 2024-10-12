@@ -1,6 +1,16 @@
 <div class="all-job-container">
     <ng-container *ngIf="jobs.length > 0; else noJobs">
-        <app-job-card *ngFor="let job of jobs" [job]="job" (deleteNotifier)="onJobDeleted($event)"></app-job-card>
+        <app-job-card *ngFor="let job of currentJobs" [job]="job"
+            (deleteNotifier)="onJobDeleted($event)"></app-job-card>
+        <div class="pagination-controls"
+            [ngStyle]="{'display': 'flex', 'justify-content': 'space-between', 'margin-top': '20px'}">
+            <button (click)="previousPage()" [disabled]="index === 3" class="pagination-button">
+                Previous
+            </button>
+            <button (click)="nextPage()" [disabled]="index >= jobs.length" class="pagination-button">
+                Next
+            </button>
+        </div>
     </ng-container>
     <ng-template #noJobs>
         <div [ngStyle]="{'width': '50%', 'display': 'flex', 'justify-content': 'center'}">
