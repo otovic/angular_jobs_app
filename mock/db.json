@@ -13,27 +13,32 @@
   ],
   "jobs": [
     {
-      "userId": 1,
-      "jobId": 1,
-      "title": "Software Developer",
-      "postedBy": "Petar Otovic",
-      "description": "We are looking for a software developer to join our team.",
-      "location": "Belgrade, Serbia",
-      "salary": "2000-3000$",
-      "date": "2021-01-01",
-      "id": "984c"
-    },
-    {
-      "id": "ce73",
+      "id": "8Kgm4MM0e1gFChpJ",
       "userId": "1",
-      "jobId": "vxMVZBuR7SXyYFI5",
-      "title": "backend Software Engineer",
+      "title": "Java Dev",
       "postedBy": "Petar Otovic",
-      "description": "description",
+      "description": "test",
       "location": "Belgrade, Serbia",
       "salaryLower": 100,
       "salaryHigher": 200,
-      "date": "2024-10-01"
+      "owned": false,
+      "applications": [
+        "2"
+      ],
+      "date": "2024-10-12T14:24:00.170Z"
+    },
+    {
+      "id": "4FoCHMebgcZJupbs",
+      "userId": "2",
+      "title": "Typescript Developer",
+      "postedBy": "John Smith",
+      "description": "test",
+      "location": "Nis, Serbia",
+      "salaryLower": 200,
+      "salaryHigher": 600,
+      "owned": false,
+      "applications": [],
+      "date": "2024-10-12T14:26:43.299Z"
     }
   ]
 }

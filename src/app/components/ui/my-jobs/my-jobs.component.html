@@ -1,14 +1,15 @@
-<div id="my-jobs-switcher">
-    <app-button text="My Posted Jobs" (click)="toggleOption(0)" [selected]="getOptionIndex() === 0" />
-    <app-button text="My Job Applications" (click)="toggleOption(1)" [selected]="getOptionIndex() === 1" />
+<!-- <div id="my-jobs-switcher">
+    <app-button text="My Posted Jobs" (click)="toggleOption(0)" [selected]="getOptionIndex() === 0"></app-button>
+    <app-button text="My Job Applications" (click)="toggleOption(1)" [selected]="getOptionIndex() === 1"></app-button>
 </div>
 
 <div *ngIf="getOptionIndex() === 0">
-    <ul>
-        <!-- Loop over jobs array and render each job -->
-        <li *ngFor="let job of jobs">
-            <h3>{{ job.title }}</h3>
-            <p>{{ job.description }}</p>
-        </li>
-    </ul>
+    <ng-container *ngIf="jobs.length > 0; else noJobs">
+        <app-job-card *ngFor="let job of jobs" [job]="job!" (deleteNotifier)="onJobDeleted($event)"></app-job-card>
+    </ng-container>
+    <ng-template #noJobs>
+        <p>No posted jobs available.</p>
+    </ng-template>
 </div>
+
+<app-error-block *ngIf="error" [error]="error"></app-error-block> -->

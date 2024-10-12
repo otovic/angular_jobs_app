@@ -14,6 +14,7 @@ export class ButtonComponent {
   @Input() text: string = 'Button';
   @Input() callback: Function = () => { };
   @Input() selected: boolean = false;
+  @Input() color?: string | null;
 
   onClick() {
     this.callback();

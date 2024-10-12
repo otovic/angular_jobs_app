@@ -1,0 +1,15 @@
+.error-block {
+    width: 50%;
+    border: 2px solid black;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-block-component {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

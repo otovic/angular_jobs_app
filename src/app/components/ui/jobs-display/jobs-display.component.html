@@ -1,0 +1,11 @@
+<div class="all-job-container">
+    <ng-container *ngIf="jobs.length > 0; else noJobs">
+        <app-job-card *ngFor="let job of jobs" [job]="job" (deleteNotifier)="onJobDeleted($event)"></app-job-card>
+    </ng-container>
+    <ng-template #noJobs>
+        <div [ngStyle]="{'width': '50%', 'display': 'flex', 'justify-content': 'center'}">
+            <p>No jobs available.</p>
+        </div>
+    </ng-template>
+    <app-error-block *ngIf="error" [error]="error"></app-error-block>
+</div>

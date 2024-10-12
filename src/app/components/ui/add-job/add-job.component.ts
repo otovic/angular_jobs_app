@@ -4,6 +4,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { UserModel } from '../../../core/models/user.model';
 import { JobsService } from '../../../services/jobs.service';
 import { UtilsService } from '../../../services/utils.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-job',
@@ -13,16 +14,19 @@ import { UtilsService } from '../../../services/utils.service';
 export class AddJobComponent {
   job: JobModel = {
     userId: undefined,
-    jobId: '',
+    id: '',
     title: '',
     postedBy: '',
     description: '',
     location: '',
     salaryLower: 0,
     salaryHigher: 0,
+    owned: false,
+    applications: [],
     date: '',
   }
   user: UserModel | null = null;
+  private userSubscription: Subscription | null = null;
 
   constructor(
     private auth: AuthService,
@@ -31,21 +35,26 @@ export class AddJobComponent {
   ) { }
 
   ngOnInit() {
-    this.auth.user$.subscribe((user) => {
+    this.userSubscription = this.auth.user$.subscribe((user) => {
       if (!user) {
         alert('You must be signed in to add a job.');
         return;
       }
 
       this.user = user;
-      this.job.userId = user?.id;
-      this.job.postedBy = user?.username;
-      this.job.jobId = this.utils.generateRandomString(16);
+      this.job.userId = user.id;
+      this.job.postedBy = user.username;
+      this.job.id = this.utils.generateRandomString(16);
     });
   }
 
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
+
   onSubmit() {
-    console.log(this.job);
     if (this.job.salaryHigher < this.job.salaryLower) {
       alert("Salary higher range must be greater than the lower range.");
       return;
@@ -55,6 +64,8 @@ export class AddJobComponent {
       alert('All fields are required.');
       return;
     }
+
+    this.job.date = new Date().toISOString();
 
     this.jobsService.postJob(this.job).subscribe(
       (job) => {

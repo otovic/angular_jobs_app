@@ -1,0 +1,20 @@
+.job-card-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.job-card {
+    width: 800px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.job-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

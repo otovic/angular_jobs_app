@@ -1,1 +1,18 @@
-<p>job-card works!</p>
+<div class="job-card-container">
+    <div class="job-card">
+        <h4>{{ job.title}}</h4>
+        <app-splitter />
+        <p><b>Job Description</b>: {{ job.description }}</p>
+        <p><b>Location</b>: {{ job.location }}</p>
+        <p><b>Salary</b>: {{ job.salaryLower | salary:job.salaryHigher }}</p>
+        <p><b>Date posted:</b>: {{ job.date | date: 'shortDate' }}</p>
+        <p><b>Posted by</b>: {{ job.postedBy }}</p>
+        <p><b>Applicants:</b>{{ job.applications.length }}</p>
+        <div class="job-controls">
+            <app-splitter />
+            <app-button text="Delete" (click)="deleteJob()" color="red" *ngIf="user && job.userId === user.id" />
+            <app-button text="Apply" (click)="applyForJob()" color="green"
+                *ngIf="user && job.userId !== user.id && !job.applications.includes(user.id.toString())" />
+        </div>
+    </div>
+</div>

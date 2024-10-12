@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { JobsService } from '../../../services/jobs.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { BehaviorSubject, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
 import { JobModel } from '../../../core/models/job.model';
 
 @Component({
@@ -13,37 +13,29 @@ export class MyJobsComponent {
   private optionIndexSubject = new BehaviorSubject<number>(0);
   private unsubscribe$ = new Subject<void>();
   jobs: JobModel[] = [];
+  error: string | null = null;
 
   constructor(
     private jobsService: JobsService,
-    private auth: AuthService
   ) { }
 
   ngOnInit() {
-    console.log('MyJobsComponent initialized');
     this.optionIndexSubject.pipe(
       takeUntil(this.unsubscribe$),
       switchMap(index => {
         if (index == 0) {
-          return this.auth.user$.pipe(
-            takeUntil(this.unsubscribe$),
-            switchMap(user => {
-              if (user) {
-                return this.jobsService.getUserJobs(user.id); // Fetch jobs based on current index
-              }
-              return []; // Return an empty array if no user
-            })
-          );
+          return this.jobsService.getUserJobs();
         }
 
         return [];
       })
     ).subscribe(
       jobs => {
-        this.jobs = jobs; // Update jobs when they change
+        this.jobs = jobs ?? [];
       },
       error => {
         console.error('Error fetching jobs:', error);
+        this.error = 'Error fetching jobs';
       }
     );
   }
@@ -55,6 +47,10 @@ export class MyJobsComponent {
 
   toggleOption(index: number) {
     this.optionIndexSubject.next(index);
+  }
+
+  onJobDeleted(jobId: string) {
+    this.jobs = this.jobs.filter(job => job.id !== jobId);
   }
 
   getOptionIndex() {

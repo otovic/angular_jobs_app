@@ -4,6 +4,10 @@ import { MyJobsComponent } from '../../components/ui/my-jobs/my-jobs.component';
 import { WrapperAnchorComponent } from '../../components/common/wrapper-anchor/wrapper-anchor.component';
 import { ButtonComponent } from '../../components/common/button/button.component';
 import { JobsService } from '../../services/jobs.service';
+import { ErrorBlockComponent } from '../../components/common/error-block/error-block.component';
+import { JobCardComponent } from '../../components/common/job-card/job-card.component';
+import { SplitterComponent } from '../../components/common/splitter/splitter.component';
+import { SalaryPipe } from '../pipes/salary.pipe';
 
 
 
@@ -14,6 +18,10 @@ import { JobsService } from '../../services/jobs.service';
     CommonModule,
     WrapperAnchorComponent,
     ButtonComponent,
+    ErrorBlockComponent,
+    JobCardComponent,
+    SplitterComponent,
+    SalaryPipe
   ],
   exports: [MyJobsComponent]
 })
