@@ -13,62 +13,19 @@
   ],
   "jobs": [
     {
-      "id": "8Kgm4MM0e1gFChpJ",
+      "id": "HV7w1987G6KMlPlG",
       "userId": "1",
-      "title": "Java Dev",
+      "title": "Java Developer",
       "postedBy": "Petar Otovic",
-      "description": "test",
+      "description": "Java Developer needed ITS URGENT",
       "location": "Belgrade, Serbia",
-      "salaryLower": 100,
-      "salaryHigher": 200,
+      "salaryLower": 1000,
+      "salaryHigher": 2000,
       "owned": false,
       "applications": [
         "2"
       ],
-      "date": "2024-10-12T14:24:00.170Z"
-    },
-    {
-      "id": "4FoCHMebgcZJupbs",
-      "userId": "2",
-      "title": "Typescript Developer",
-      "postedBy": "John Smith",
-      "description": "test",
-      "location": "Nis, Serbia",
-      "salaryLower": 200,
-      "salaryHigher": 600,
-      "owned": false,
-      "applications": [
-        "1"
-      ],
-      "date": "2024-10-12T14:26:43.299Z"
-    },
-    {
-      "id": "gGo8qF1vNz6AC6JU",
-      "userId": "2",
-      "title": "Operater na masini",
-      "postedBy": "John Smith",
-      "description": "deskripcija",
-      "location": "Nis, Serbia",
-      "salaryLower": 200,
-      "salaryHigher": 400,
-      "owned": false,
-      "applications": [],
-      "date": "2024-10-12T21:21:08.733Z"
-    },
-    {
-      "id": "O54ZxDdXOrbN6AZh",
-      "userId": "2",
-      "title": "Test",
-      "postedBy": "John Smith",
-      "description": "asdsdasdasda",
-      "location": "Belgrade, Serbia",
-      "salaryLower": 1,
-      "salaryHigher": 2,
-      "owned": false,
-      "applications": [
-        "1"
-      ],
-      "date": "2024-10-12T21:35:03.096Z"
+      "date": "2024-10-13T20:09:11.239Z"
     }
   ]
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { JobModel } from '../../../core/models/job.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserModel } from '../../../core/models/user.model';
-import { JobsService } from '../../../services/jobs.service';
+import { JobsService } from '../../../core/services/jobs.service';
 import { UtilsService } from '../../../services/utils.service';
 import { Subscription } from 'rxjs';
 

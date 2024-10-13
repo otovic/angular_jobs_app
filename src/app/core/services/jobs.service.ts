@@ -1,37 +1,21 @@
 import { Injectable } from '@angular/core';
-import { JobModel } from '../core/models/job.model';
+import { JobModel } from '../models/job.model';
 import { HttpClient } from '@angular/common/http';
-import { JOB_SERVER_URL } from '../config/data/constants';
-import { BehaviorSubject, catchError, map, Observable, of, Subscription } from 'rxjs';
+import { JOB_SERVER_URL } from '../../config/data/constants';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthService } from '../core/services/auth.service';
-import { UserModel } from '../core/models/user.model';
+import { AuthService } from './auth.service';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
-  userSubscription: Subscription | null = null;
-  private user = new BehaviorSubject<UserModel | null>(null);
-
   constructor(
     private http: HttpClient,
     private router: Router,
     private auth: AuthService
-  ) {
-    this.userSubscription = this.auth.user$.subscribe(user => {
-      this.user.next(user);
-      if (user) {
-        console.log("Logged-in user:", user);
-      } else {
-        console.log("No user is logged in");
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    this.userSubscription?.unsubscribe();
-  }
+  ) { }
 
   postJob(job: JobModel): Observable<any> {
     return this.http.post(`${JOB_SERVER_URL}`, job).pipe(
@@ -46,8 +30,8 @@ export class JobsService {
     );
   }
 
-  getUserJobs(): Observable<any> {
-    return this.http.get<JobModel[]>(`${JOB_SERVER_URL}?userId=${this.user.getValue()?.id}`).pipe(
+  getUserJobs(user: UserModel): Observable<any> {
+    return this.http.get<JobModel[]>(`${JOB_SERVER_URL}?userId=${user.id}`).pipe(
       map((jobs) => {
         return jobs.map((job) => {
           return {
@@ -84,10 +68,28 @@ export class JobsService {
     );
   }
 
-  applyForJob(job: JobModel): Observable<boolean> {
+  fetchUserApplications(user: UserModel): Observable<any> {
+    return this.http.get<JobModel[]>(`${JOB_SERVER_URL}`).pipe(
+      map((jobs) => {
+        return jobs.filter(job => job.applications.includes(user.id.toString()));
+      }),
+      catchError((error) => {
+        console.log('error', error);
+        return of([]);
+      })
+    );
+  }
+
+  applyForJob(job: JobModel, user: UserModel): Observable<boolean> {
+    if (!user) {
+      console.error('User not found');
+      alert('User not found');
+      return of(false);
+    }
+
     return this.http.put<JobModel>(`${JOB_SERVER_URL}/${job.id}`, {
       ...job,
-      applications: [...job.applications, this.user.getValue()?.id]
+      applications: [...job.applications, user.id]
     }).pipe(
       map(() => {
         return true;

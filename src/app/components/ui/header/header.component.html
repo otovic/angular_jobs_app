@@ -1,6 +1,8 @@
 <header id="app_header" class="header">
     <div class="title-container">
-        <h4>Angular Jobs App</h4>
+        <app-wrapper-anchor [path]="'/'">
+            <h4>Angular Jobs App</h4>
+        </app-wrapper-anchor>
     </div>
     <nav class="nav-links" *ngIf="user">
         <app-anchor [text]="'Home'" [path]="'/'"></app-anchor>

@@ -4,7 +4,7 @@ import { SplitterComponent } from '../splitter/splitter.component';
 import { SalaryPipe } from '../../../core/pipes/salary.pipe';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
-import { JobsService } from '../../../services/jobs.service';
+import { JobsService } from '../../../core/services/jobs.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { UserModel } from '../../../core/models/user.model';
@@ -36,7 +36,7 @@ export class JobCardComponent {
 
   ngOnInit() {
     this.userSubscription = this.auth.user$.subscribe(user => {
-      console.log('Usersdasdasda:', user && this.job.applications.includes(user.id!.toString()));
+      console.log('User in job card:', user);
       this.user = user;
     });
   }
@@ -60,10 +60,10 @@ export class JobCardComponent {
   }
 
   applyForJob() {
-    this.jobsService.applyForJob(this.job!).subscribe(
+    console.log('Applying for job:', this.user);
+    this.jobsService.applyForJob(this.job!, this.user!).subscribe(
       (success) => {
         if (success) {
-          console.log('Job applied successfully');
           this.job.applications.push(this.user!.id!.toString());
           if (this.applyNotifier) this.applyNotifier.emit(this.job.id!);
         }

@@ -13,7 +13,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: UserModel | null = null;
   private userSubscription: Subscription | null = null;
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(
+    private router: Router,
+    private auth: AuthService
+  ) {
+    console.log('Header component created');
+  }
 
   ngOnInit() {
     this.userSubscription = this.auth.user$.subscribe((user) => {

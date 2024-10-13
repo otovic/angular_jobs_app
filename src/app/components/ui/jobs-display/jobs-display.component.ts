@@ -1,37 +1,67 @@
 import { Component, Input } from '@angular/core';
 import { JobModel } from '../../../core/models/job.model';
-import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
-import { JobsService } from '../../../services/jobs.service';
+import { BehaviorSubject, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { JobsService } from '../../../core/services/jobs.service';
 import { JobCardComponent } from '../../common/job-card/job-card.component';
 import { ErrorBlockComponent } from '../../common/error-block/error-block.component';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
+import { UserModel } from '../../../core/models/user.model';
+import { ButtonComponent } from '../../common/button/button.component';
 
 @Component({
   selector: 'app-jobs-display',
   standalone: true,
-  providers: [JobsService],
+  providers: [
+    JobsService,
+    AuthService
+  ],
   imports: [
     CommonModule,
     JobCardComponent,
-    ErrorBlockComponent
+    ErrorBlockComponent,
+    ButtonComponent
   ],
   templateUrl: './jobs-display.component.html',
   styleUrl: './jobs-display.component.css'
 })
 export class JobsDisplayComponent {
+  userSubscription = new Subscription();
+  user: UserModel | null = null;
+
+  @Input() page = 0;
+
   @Input() option = 0;
   private unsubscribe$ = new Subject<void>();
+
   jobs: JobModel[] = [];
   currentJobs: JobModel[] = [];
+
   index: number = 3;
   error: string | null = null;
 
   constructor(
+    private auth: AuthService,
     private jobsService: JobsService,
   ) { }
 
   ngOnInit() {
-    this.fetchJobs();
+    this.userSubscription = this.auth.user$.subscribe(user => {
+      this.user = user;
+
+      if (!this.user && this.option !== 0) {
+        console.error('User not found');
+        return;
+      }
+
+      this.fetchJobs();
+    });
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe;
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   fetchJobs() {
@@ -39,7 +69,6 @@ export class JobsDisplayComponent {
       case 0:
         this.jobsService.getAllJobs().subscribe(
           (jobs) => {
-            console.log('Jobs fetched successfuly:', jobs);
             this.jobs = jobs;
             this.updateCurrentJobs();
           },
@@ -50,9 +79,20 @@ export class JobsDisplayComponent {
         );
         break;
       case 1:
-        this.jobsService.getUserJobs().subscribe(
+        this.jobsService.getUserJobs(this.user!).subscribe(
           (jobs) => {
-            console.log('Jobs fetched successfuly:', jobs);
+            this.jobs = jobs;
+            this.updateCurrentJobs();
+          },
+          (error) => {
+            console.error('Error fetching jobs:', error);
+            this.error = 'Error fetching jobs';
+          }
+        );
+        break;
+      case 2:
+        this.jobsService.fetchUserApplications(this.user!).subscribe(
+          (jobs) => {
             this.jobs = jobs;
             this.updateCurrentJobs();
           },
@@ -65,11 +105,6 @@ export class JobsDisplayComponent {
       default:
         break;
     }
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   updateCurrentJobs() {
@@ -92,9 +127,11 @@ export class JobsDisplayComponent {
 
   onJobDeleted(jobId: string) {
     this.jobs = this.jobs.filter(job => job.id !== jobId);
+    this.updateCurrentJobs();
   }
 
-  // getOptionIndex() {
-  //   return this.optionIndexSubject.value;
-  // }
+  toggleOption(index: number) {
+    this.option = index;
+    this.fetchJobs();
+  }
 }

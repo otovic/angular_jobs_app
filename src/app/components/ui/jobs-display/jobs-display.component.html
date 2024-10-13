@@ -1,4 +1,8 @@
 <div class="all-job-container">
+    <div id="my-jobs-switcher" *ngIf="page == 1">
+        <app-button text="My Posted Jobs" (click)="toggleOption(1)" [selected]="option === 1"></app-button>
+        <app-button text="My Job Applications" (click)="toggleOption(2)" [selected]="option === 2"></app-button>
+    </div>
     <ng-container *ngIf="jobs.length > 0; else noJobs">
         <app-job-card *ngFor="let job of currentJobs" [job]="job"
             (deleteNotifier)="onJobDeleted($event)"></app-job-card>
