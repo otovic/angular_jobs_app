@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { JobModel } from '../../../core/models/job.model';
-import { BehaviorSubject, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { JobsService } from '../../../core/services/jobs.service';
 import { JobCardComponent } from '../../common/job-card/job-card.component';
 import { ErrorBlockComponent } from '../../common/error-block/error-block.component';
@@ -14,7 +14,6 @@ import { ButtonComponent } from '../../common/button/button.component';
   standalone: true,
   providers: [
     JobsService,
-    AuthService
   ],
   imports: [
     CommonModule,
@@ -67,44 +66,35 @@ export class JobsDisplayComponent {
   fetchJobs() {
     switch (this.option) {
       case 0:
-        this.jobsService.getAllJobs().subscribe(
-          (jobs) => {
-            this.jobs = jobs;
-            this.updateCurrentJobs();
-          },
-          (error) => {
-            console.error('Error fetching jobs:', error);
-            this.error = 'Error fetching jobs';
-          }
-        );
+        this.subscribeToJobs(this.jobsService.getAllJobs());
         break;
       case 1:
-        this.jobsService.getUserJobs(this.user!).subscribe(
-          (jobs) => {
-            this.jobs = jobs;
-            this.updateCurrentJobs();
-          },
-          (error) => {
-            console.error('Error fetching jobs:', error);
-            this.error = 'Error fetching jobs';
-          }
-        );
+        if (this.user) {
+          this.subscribeToJobs(this.jobsService.getUserJobs(this.user));
+        }
         break;
       case 2:
-        this.jobsService.fetchUserApplications(this.user!).subscribe(
-          (jobs) => {
-            this.jobs = jobs;
-            this.updateCurrentJobs();
-          },
-          (error) => {
-            console.error('Error fetching jobs:', error);
-            this.error = 'Error fetching jobs';
-          }
-        );
+        if (this.user) {
+          this.subscribeToJobs(this.jobsService.fetchUserApplications(this.user));
+        }
         break;
       default:
+        this.jobs = [];
         break;
     }
+  }
+
+  private subscribeToJobs(observable: Observable<JobModel[]>) {
+    observable.subscribe({
+      next: (jobs) => {
+        this.jobs = jobs;
+        this.updateCurrentJobs();
+      },
+      error: (error) => {
+        console.error('Error fetching jobs:', error);
+        this.error = 'Error fetching jobs';
+      }
+    });
   }
 
   updateCurrentJobs() {
@@ -132,6 +122,6 @@ export class JobsDisplayComponent {
 
   toggleOption(index: number) {
     this.option = index;
-    this.fetchJobs();
+    this.fetchJobs()
   }
 }

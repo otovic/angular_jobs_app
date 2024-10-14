@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddJobComponent } from '../../components/ui/add-job/add-job.component';
 import { FormsModule } from '@angular/forms';
-import { UtilsService } from '../../services/utils.service';
+import { UtilsService } from '../../shared/services/utils.service';
 
 @NgModule({
     declarations: [

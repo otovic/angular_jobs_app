@@ -3,7 +3,7 @@ import { JobModel } from '../../../core/models/job.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserModel } from '../../../core/models/user.model';
 import { JobsService } from '../../../core/services/jobs.service';
-import { UtilsService } from '../../../services/utils.service';
+import { UtilsService } from '../../../shared/services/utils.service';
 import { Subscription } from 'rxjs';
 
 @Component({
